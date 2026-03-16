@@ -54,7 +54,7 @@ namespace Симулятор_простого_рестарана_4
                 return new List<MenuItem>();
             }
         }
-
+        
         public IEnumerator<MenuItem> GetEnumerator()
         {
             foreach (var customer in orders)

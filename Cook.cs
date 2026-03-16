@@ -14,7 +14,7 @@ namespace Симулятор_простого_рестарана_4
         {
             server.Ready += ProcessOrders;  
         }
-
+        
         private void ProcessOrders(object sender, TableReadyEventArgs e)
         {
             foreach (Chicken chicken in e.Table.Get<Chicken>())

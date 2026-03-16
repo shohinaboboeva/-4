@@ -10,7 +10,7 @@ namespace Симулятор_простого_рестарана_4
     internal class Server
     {
         public event EventHandler<TableReadyEventArgs> Ready;
-
+        
         private TableRequest table = new TableRequest();
 
         private List<string> serviceOrder = new List<string>();

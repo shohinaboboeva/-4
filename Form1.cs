@@ -30,7 +30,7 @@ namespace Симулятор_простого_рестарана_4
             cook.Processed += server.ServeFood;
             cook.Processed += (s, e) =>
             {
-                richTextBox1.AppendText("All food processed successfully!\n");
+                richTextBox1.AppendText("All food processed successfully!!!\n");
             };
 
             comboBox1.Items.AddRange(new string[]
