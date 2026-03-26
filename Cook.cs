@@ -12,22 +12,23 @@ namespace Симулятор_простого_рестарана_4
 
         public void Subscribe(Server server)
         {
-            server.Ready += ProcessOrders;  
+            server.Ready += ProcessOrders;
         }
-        
+
         private void ProcessOrders(object sender, TableReadyEventArgs e)
         {
-            foreach (Chicken chicken in e.Table.Get<Chicken>())
+            // Готовим курицу
+            foreach (var chicken in e.Table.Get<Chicken>())
             {
                 chicken.Obtain();
                 chicken.CutUp();
                 chicken.Cook();
             }
 
-            foreach (Egg egg in e.Table.Get<Egg>())
+            // Готовим яйца
+            foreach (var egg in e.Table.Get<Egg>())
             {
                 egg.Obtain();
-
                 using (egg)
                 {
                     egg.Crack();
@@ -35,9 +36,14 @@ namespace Симулятор_простого_рестарана_4
                 }
             }
 
+            // Напитки только берём
+            foreach (var drink in e.Table.Get<Drink>())
+            {
+                drink.Obtain();
+            }
+
+            // Сообщаем, что всё готово
             Processed?.Invoke(this, EventArgs.Empty);
         }
-
-
     }
 }

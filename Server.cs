@@ -10,15 +10,13 @@ namespace Симулятор_простого_рестарана_4
     internal class Server
     {
         public event EventHandler<TableReadyEventArgs> Ready;
-        
+
         private TableRequest table = new TableRequest();
 
-        private List<string> serviceOrder = new List<string>();
+
 
         public void TakeOrder(string name, int chicken, int egg, bool drink)
         {
-            serviceOrder.Add(name);
-
             for (int i = 0; i < chicken; i++)
                 table.Add<Chicken>(name);
 
@@ -34,20 +32,12 @@ namespace Симулятор_простого_рестарана_4
             Ready?.Invoke(this, new TableReadyEventArgs(table));
         }
 
+        // 🔥 ПРАВИЛЬНО: через IEnumerable
         public void ServeFood(object sender, EventArgs e)
         {
-            foreach (string customer in serviceOrder)
+            foreach (var item in table)
             {
-
-                foreach (var item in table[customer])
-                {
-                    item.Serve();
-                }
-            }
-
-            foreach (var drink in table.Get<Drink>())
-            {
-                drink.Obtain();
+                item.Serve();
             }
         }
     }

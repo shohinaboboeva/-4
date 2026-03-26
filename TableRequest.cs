@@ -11,19 +11,18 @@ namespace Симулятор_простого_рестарана_4
     {
         private List<CustomerOrders> orders = new List<CustomerOrders>();
 
-        public void Add<T>(string customerName) where T : MenuItem, new()
+        public void Add<T>(string name) where T : MenuItem, new()
         {
-            CustomerOrders customer = orders.Find(c => c.Name == customerName);
+            var customer = orders.Find(c => c.Name == name);
 
             if (customer == null)
             {
-                customer = new CustomerOrders(customerName);
+                customer = new CustomerOrders(name);
                 orders.Add(customer);
             }
 
             T item = new T();
-            item.CustomerName = customerName;
-
+            item.CustomerName = name;
             customer.Items.Add(item);
         }
 
@@ -35,8 +34,8 @@ namespace Симулятор_простого_рестарана_4
             {
                 foreach (var item in customer.Items)
                 {
-                    if (item is T typed)
-                        result.Add(typed);
+                    if (item is T t)
+                        result.Add(t);
                 }
             }
 
@@ -47,25 +46,33 @@ namespace Симулятор_простого_рестарана_4
         {
             get
             {
-                CustomerOrders customer = orders.Find(c => c.Name == name);
-                if (customer != null)
-                    return customer.Items;
-
-                return new List<MenuItem>();
+                var customer = orders.Find(c => c.Name == name);
+                return customer.Items;
             }
         }
-        
+
+        // 🔥 ВАЖНО: сначала напитки!
         public IEnumerator<MenuItem> GetEnumerator()
         {
+            // Сначала напитки
             foreach (var customer in orders)
+            {
                 foreach (var item in customer.Items)
+                {
                     if (item is Drink)
                         yield return item;
+                }
+            }
 
+            // Потом еда
             foreach (var customer in orders)
+            {
                 foreach (var item in customer.Items)
+                {
                     if (!(item is Drink))
                         yield return item;
+                }
+            }
         }
 
         IEnumerator IEnumerable.GetEnumerator()

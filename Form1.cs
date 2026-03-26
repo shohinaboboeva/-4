@@ -17,20 +17,26 @@ namespace Симулятор_простого_рестарана_4
         private Server server;
         private Cook cook;
 
+
+
         public Form1()
         {
             InitializeComponent();
 
+           
 
             server = new Server();
             cook = new Cook();
 
             cook.Subscribe(server);
 
+            // метод
             cook.Processed += server.ServeFood;
+
+            // лямбда
             cook.Processed += (s, e) =>
             {
-                richTextBox1.AppendText("All food processed successfully!!!\n");
+                richTextBox1.AppendText("Все блюда готовы!\n");
             };
 
             comboBox1.Items.AddRange(new string[]
@@ -60,6 +66,8 @@ namespace Симулятор_простого_рестарана_4
 
             richTextBox1.AppendText(
                 $"Order received from {name}\n");
+
+            
         }
 
         private void button2_Click(object sender, EventArgs e)

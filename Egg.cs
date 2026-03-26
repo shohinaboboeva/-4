@@ -28,9 +28,8 @@ namespace Симулятор_простого_рестарана_4
 
         public void Dispose()
         {
-            DiscardShells();
+            
         }
 
-        private void DiscardShells() { }
     }
 }

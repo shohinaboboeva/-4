@@ -10,6 +10,7 @@ namespace Симулятор_простого_рестарана_4
     {
         public override void Obtain()
         {
+
         }
 
        
