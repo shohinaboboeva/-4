@@ -30,10 +30,8 @@ namespace Симулятор_простого_рестарана_4
 
             cook.Subscribe(server);
 
-            // метод
             cook.Processed += server.ServeFood;
 
-            // лямбда
             cook.Processed += (s, e) =>
             {
                 richTextBox1.AppendText("Все блюда готовы!\n");

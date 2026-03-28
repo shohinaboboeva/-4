@@ -51,10 +51,8 @@ namespace Симулятор_простого_рестарана_4
             }
         }
 
-        // 🔥 ВАЖНО: сначала напитки!
         public IEnumerator<MenuItem> GetEnumerator()
         {
-            // Сначала напитки
             foreach (var customer in orders)
             {
                 foreach (var item in customer.Items)
@@ -64,7 +62,6 @@ namespace Симулятор_простого_рестарана_4
                 }
             }
 
-            // Потом еда
             foreach (var customer in orders)
             {
                 foreach (var item in customer.Items)

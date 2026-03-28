@@ -17,7 +17,6 @@ namespace Симулятор_простого_рестарана_4
 
         private void ProcessOrders(object sender, TableReadyEventArgs e)
         {
-            // Готовим курицу
             foreach (var chicken in e.Table.Get<Chicken>())
             {
                 chicken.Obtain();
@@ -25,7 +24,6 @@ namespace Симулятор_простого_рестарана_4
                 chicken.Cook();
             }
 
-            // Готовим яйца
             foreach (var egg in e.Table.Get<Egg>())
             {
                 egg.Obtain();
@@ -36,13 +34,11 @@ namespace Симулятор_простого_рестарана_4
                 }
             }
 
-            // Напитки только берём
             foreach (var drink in e.Table.Get<Drink>())
             {
                 drink.Obtain();
             }
 
-            // Сообщаем, что всё готово
             Processed?.Invoke(this, EventArgs.Empty);
         }
     }

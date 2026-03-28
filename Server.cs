@@ -9,6 +9,7 @@ namespace Симулятор_простого_рестарана_4
 {
     internal class Server
     {
+
         public event EventHandler<TableReadyEventArgs> Ready;
 
         private TableRequest table = new TableRequest();
@@ -32,7 +33,6 @@ namespace Симулятор_простого_рестарана_4
             Ready?.Invoke(this, new TableReadyEventArgs(table));
         }
 
-        // 🔥 ПРАВИЛЬНО: через IEnumerable
         public void ServeFood(object sender, EventArgs e)
         {
             foreach (var item in table)
